@@ -10,18 +10,10 @@ const DEFAULT_BREAKPOINTS = {
 };
 
 const orderedQuery = [
-  {
-    sm: 576,
-  },
-  {
-    md: 768,
-  },
-  {
-    lg: 992,
-  },
-  {
-    xl: 1200,
-  },
+  {sm: 576},
+  {md: 768},
+  {lg: 992},
+  {xl: 1200},
 ];
 
 const MediaQueryProvider = ({
@@ -32,14 +24,15 @@ const MediaQueryProvider = ({
   children,
 }) => {
   const returnOrderQueryChecker = () => {
-    if (!maxWidth && !minWidth) return orderedQuery;
+    if (!maxWidth && !minWidth && !mediaQuery) return orderedQuery;
     return undefined;
   };
+  
   return (
     <MediaContext.Provider
       value={{
         mediaQuery,
-        delayWithPageResize,
+        delayWithPageResize : Number(delayWithPageResize),
         maxWidth,
         minWidth,
         orderedQuery: returnOrderQueryChecker(),
